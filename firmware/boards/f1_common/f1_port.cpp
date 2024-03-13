@@ -71,22 +71,22 @@ void Configuration::LoadDefaults()
         // enable RusEFI protocol
         afr[i].RusEfiTx = true;
         afr[i].RusEfiTxDiag = true;
-        afr[i].RusEfiIdOffset = i;
+        afr[i].RusEfiIdOffset = i*2;
 
         // Disable AemNet
         afr[i].AemNetTx = false;
-        afr[i].AemNetIdOffset = i;
+        afr[i].AemNetIdOffset = i*2;
     }
 
     for (i = 0; i < EGT_CHANNELS; i++) {
         // disable RusEFI protocol - not implemented
-        afr[i].RusEfiTx = false;
-        afr[i].RusEfiTxDiag = false;
-        afr[i].RusEfiIdOffset = i;
+        egt[i].RusEfiTx = false;
+        egt[i].RusEfiTxDiag = false;
+        egt[i].RusEfiIdOffset = i;
 
         // Enable AemNet
-        afr[i].AemNetTx = true;
-        afr[i].AemNetIdOffset = i;
+        egt[i].AemNetTx = true;
+        egt[i].AemNetIdOffset = i;
     }
 
     /* Finaly */

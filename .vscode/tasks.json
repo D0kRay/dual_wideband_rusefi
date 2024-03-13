@@ -45,7 +45,7 @@
         {
             "label": "Build F1 Dual",
             "type": "shell",
-            "command": "make -j8 BOARD=f1_dual",
+            "command": "make -j8 BOARD=f1_dual_rev1",
             "options": {
                 "cwd": "${workspaceRoot}/firmware"
             },
