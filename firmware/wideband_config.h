@@ -7,7 +7,7 @@
 //    Defaults
 // *******************************
 #ifndef EGT_CHANNELS
-    #define EGT_CHANNELS 0
+    #define EGT_CHANNELS 2
 #endif
 
 // *******************************

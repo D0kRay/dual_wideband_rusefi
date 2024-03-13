@@ -43,7 +43,7 @@ struct UEGOData
 static_assert(sizeof(UEGOData) == 8);
 
 #define AEMNET_EGT_TX_PERIOD        50
-#define AEMNET_EGT_BASE_ID          0x000A0305
+#define AEMNET_EGT_BASE_ID          0x0000194
 
 // 29 bit ID, 500kbs, rate 20 hz, endian big, DLC 8
 // ID: 0x000A0305
