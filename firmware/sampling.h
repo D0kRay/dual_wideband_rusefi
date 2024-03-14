@@ -13,9 +13,11 @@ struct ISampler
     virtual float GetInternalHeaterVoltage() const = 0;
     virtual float GetSensorTemperature() const = 0;
     virtual float GetSensorInternalResistance() const = 0;
+    virtual uint16_t GetRawADCValue() const = 0;
 };
 
 struct AnalogChannelResult;
+struct AnalogInputChannelResult;
 
 class Sampler : public ISampler
 {
@@ -30,6 +32,10 @@ public:
     float GetInternalHeaterVoltage() const override;
     float GetSensorTemperature() const override;
     float GetSensorInternalResistance() const override;
+    uint16_t GetRawADCValue() const override;
+    uint16_t SetRawADCValue(AnalogInputChannelResult& result);
+    
+
 
 private:
     float r_2 = 0;
@@ -40,6 +46,7 @@ private:
     float nernstV = 0;
     float pumpCurrentSenseVoltage = 0;
     int nernstClamped = 0;
+    uint16_t rawADC = 0;
 
 #ifdef BATTERY_INPUT_DIVIDER
     float internalHeaterVoltage = 0;

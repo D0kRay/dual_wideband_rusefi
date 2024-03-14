@@ -66,6 +66,15 @@ struct DiagData
     uint8_t pad;
 };
 
+struct AdcData
+{
+    // 0 to 65535 ADC Value
+    uint16_t ADC_raw_Value;
+    uint16_t ADC_voltage_Value;
+    uint16_t Sensor_Value;
+    uint8_t pad[2];
+};
+
 static inline const char* describeFault(Fault fault) {
     switch (fault) {
         case Fault::None:

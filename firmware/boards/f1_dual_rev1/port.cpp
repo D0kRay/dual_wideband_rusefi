@@ -145,6 +145,10 @@ AnalogResult AnalogSample()
     res.ch[1].PumpCurrentVoltage = AverageSamples(adcBuffer, 0);
     res.ch[1].HeaterSupplyVoltage = r_heater_voltage;
 
+    //Average Analog Input Values
+    res.ch_analog_in[0].AnalogVoltage = AverageSamples(adcBuffer, 4); //R_AUX_ADC
+    res.ch_analog_in[1].AnalogVoltage = AverageSamples(adcBuffer, 5); //L_AUX_ADC
+
     return res;
 }
 

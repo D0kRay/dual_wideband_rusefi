@@ -6,6 +6,7 @@
 // This board implements two channels
 #define AFR_CHANNELS 2
 #define EGT_CHANNELS 2
+#define ANALOG_IN_CHANNELS 2
 
 // Fundamental board constants
 #define VCC_VOLTS (3.3f)

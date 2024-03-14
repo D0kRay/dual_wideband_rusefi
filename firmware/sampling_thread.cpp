@@ -8,6 +8,7 @@
 #include "port.h"
 
 static Sampler samplers[AFR_CHANNELS];
+static Sampler adcsamplers[ANALOG_IN_CHANNELS];
 
 const ISampler& GetSampler(int ch)
 {
@@ -35,6 +36,10 @@ static void SamplingThread(void*)
         for (int ch = 0; ch < AFR_CHANNELS; ch++)
         {
             samplers[ch].ApplySample(result.ch[ch], result.VirtualGroundVoltageInt);
+        }
+        for (int ch = AFR_CHANNELS; ch < ANALOG_IN_CHANNELS+AFR_CHANNELS; ch++)
+        {
+            samplers[ch].SetRawADCValue(result.ch_analog_in[ch]);
         }
 
 #if defined(TS_ENABLED)

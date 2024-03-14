@@ -67,6 +67,11 @@ void Configuration::LoadDefaults()
     auxOutputSource[0] = AuxOutputMode::Afr0;
     auxOutputSource[1] = AuxOutputMode::Afr1;
 
+    for (i = 0; i < 8; i++) {
+        auxInBins[0][i] = auxInBins[1][i] = i;
+        auxInValues[0][i] = auxInValues[1][i] = i+2;
+    }
+
     for (i = 0; i < AFR_CHANNELS; i++) {
         // enable RusEFI protocol
         afr[i].RusEfiTx = true;
@@ -87,6 +92,17 @@ void Configuration::LoadDefaults()
         // Enable AemNet
         egt[i].AemNetTx = true;
         egt[i].AemNetIdOffset = i;
+    }
+
+    for (i = 0; i < ANALOG_IN_CHANNELS; i++) {
+        // enable RusEFI protocol - ADC IN 
+        adc[i].RusEfiTx = true;
+        adc[i].RusEfiTxDiag = true;
+        adc[i].RusEfiIdOffset = i+10;
+
+        // Disable AemNet
+        adc[i].AemNetTx = false;
+        adc[i].AemNetIdOffset = i+10;
     }
 
     /* Finaly */

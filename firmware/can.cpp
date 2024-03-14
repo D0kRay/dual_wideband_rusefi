@@ -204,11 +204,25 @@ void SendRusefiFormat(uint8_t ch)
     }
 }
 
+void SendRusefiADCINFormat(uint8_t ch)
+{
+    Configuration* configuration = GetConfiguration();
+    auto id = WB_DATA_BASE_ADDR + configuration->adc[ch].RusEfiIdOffset;
+    const auto& sampler = GetSampler(ch+AFR_CHANNELS);
+
+    if (configuration->adc[ch].RusEfiTx) {
+        CanTxTyped<wbo::AdcData> frame(id, true);
+
+        frame.get().ADC_raw_Value = sampler.GetRawADCValue();
+    }
+}
+
 // Weak link so boards can override it
 __attribute__((weak)) void SendCanForChannel(uint8_t ch)
 {
     SendRusefiFormat(ch);
     SendAemNetUEGOFormat(ch);
+    SendCanADCINForChannel(ch);
 }
 
 __attribute__((weak)) void SendCanEgtForChannel(uint8_t ch)
@@ -217,4 +231,12 @@ __attribute__((weak)) void SendCanEgtForChannel(uint8_t ch)
     // TODO: implement RusEFI protocol?
     SendAemNetEGTFormat(ch);
 #endif /* EGT_CHANNELS > 0 */
+}
+
+__attribute__((weak)) void SendCanADCINForChannel(uint8_t ch)
+{
+#if (ANALOG_IN_CHANNELS > 0)
+    // TODO: TEST?
+    SendRusefiADCINFormat(ch);
+#endif /* ANALOG_IN_CHANNELS > 0 */
 }

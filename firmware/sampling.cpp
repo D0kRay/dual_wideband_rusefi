@@ -142,3 +142,14 @@ void Sampler::ApplySample(AnalogChannelResult& result, float virtualGroundVoltag
     r_3 = r_2;
     r_2 = r_1;
 }
+
+
+uint16_t Sampler::GetRawADCValue() const
+{
+    return rawADC;
+}
+
+uint16_t Sampler::SetRawADCValue(AnalogInputChannelResult& result)
+{
+    rawADC = result.AnalogVoltage;
+}

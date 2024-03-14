@@ -17,10 +17,17 @@ struct AnalogChannelResult
     bool NernstClamped;
 };
 
+struct AnalogInputChannelResult
+{
+    float AnalogVoltage; //Voltage of the ADC Pin for additional Sensors
+};
+
+
 struct AnalogResult
 {
     AnalogChannelResult ch[AFR_CHANNELS];
     float VirtualGroundVoltageInt;
+    AnalogInputChannelResult ch_analog_in[ANALOG_IN_CHANNELS];
     /* TODO: add SupplyVoltage - some boards can measure supply voltage */
 };
 
@@ -64,6 +71,10 @@ public:
             float auxOutValues[2][8];
             AuxOutputMode auxOutputSource[2];
 
+            // AUX IN curves for sensors
+            float auxInBins[2][8];
+            float auxInValues[2][8];
+
             SensorType sensorType;
 
             // per AFR channel settings
@@ -87,6 +98,16 @@ public:
                 uint8_t AemNetIdOffset;
                 uint8_t pad[5];
             } egt[2];
+
+            struct {
+                bool RusEfiTx:1;
+                bool RusEfiTxDiag:1;
+                bool AemNetTx:1;
+
+                uint8_t RusEfiIdOffset;
+                uint8_t AemNetIdOffset;
+                uint8_t pad[5];
+            } adc[2];
         } __attribute__((packed));
 
         // pad to 256 bytes including tag
